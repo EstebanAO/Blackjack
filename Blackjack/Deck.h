@@ -23,7 +23,7 @@ Deck::Deck()
     cartaActual = 0;
     
     int valor[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-    string palo[] = {"Corazones", "Diamantes", "Espadas", "Tréboles"};
+    string palo[] = {"Heart", "Diamond", "Spade", "Club"};
     
     for (int cards = 0; cards < 52; cards++)
     {

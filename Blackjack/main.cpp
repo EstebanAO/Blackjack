@@ -21,27 +21,27 @@ void deal(Deck &deckJuego, Mano &ManoD, Mano &ManoJ)
     ManoJ = *new Mano (deckJuego);
     ManoD = *new Mano (deckJuego);
     
-    cout<<"Mano del dealer: "<<endl<<endl;
+    cout<<"Dealer's hand: "<<endl<<endl;
     ManoD.printD();
-    cout<<endl<<endl<<"Mano del jugador: "<<endl<<endl;
+    cout<<endl<<endl<<"Your hand: "<<endl<<endl;
     ManoJ.printJ();
 
 }
 
 void hit(Mano &ManoJ,Mano ManoD, Deck &deckJuego, bool &disableOptions, int &score)
 {
-    cout<<endl<<"Mano del dealer: "<<endl<<endl;
+    cout<<endl<<"Dealer's hand: "<<endl<<endl;
     ManoD.printD();
     
-    cout<<endl<<"Mano del jugador: "<<endl<<endl;
+    cout<<endl<<"Your hand: "<<endl<<endl;
     ManoJ.getCarta(deckJuego);
     ManoJ.printJ();
     
     if (ManoJ.getscore() > 21)
     {
-        cout<<"Perdiste, tu mano supera 21 puntos"<<endl;
+        cout<<"Busted, your hand is above 21."<<endl;
         score--;
-        cout<<endl<<"El score es: "<<score<<endl;
+        cout<<endl<<"Your score is: "<<score<<endl;
         disableOptions = true;
     }
 }
@@ -60,26 +60,24 @@ void stand(Mano &ManoD, Mano ManoJ, Deck &deckJuego, bool &disableOptions, int &
     
     if (ManoJ.getscore() > 21)
     {
-        cout<<"Perdiste, las cartas del dealer son:"<<endl;
+        cout<<"Busted, dealer's hand is: "<<endl;
         ManoD.printJ();
         score--;
-        cout<<endl<<"El score es: "<<score<<endl;
         
     }
     else if (ManoD.getscore() >= ManoJ.getscore() && ManoD.getscore() <= 21)
     {
-        cout<<"Perdiste, las cartas del dealer son:"<<endl;
+        cout<<"Busted, dealer's hand is:"<<endl;
         ManoD.printJ();
         score--;
-        cout<<endl<<"El score es: "<<score<<endl;
     }
     else
     {
-        cout<<"Ganaste, las cartas del dealer son:"<<endl;
+        cout<<"You won, dealer's hand is:"<<endl;
         ManoD.printJ();
         score++;
-        cout<<endl<<"El score es: "<<score<<endl;
     }
+    cout<<endl<<"Your score is: "<<score<<endl;
     disableOptions = true;
 }
 
@@ -98,7 +96,7 @@ int main()
     
     char controller = 'r';
     cout<<endl<<"============================================"<<endl<<endl;
-    cout<<"¿Que desea hacer? Hit (h), Deal (d), Stand (s), Salir (e) "<<endl;
+    cout<<"Next move:  Hit (h), Deal (d), Stand (s), Exit (e) "<<endl;
     cin>>controller;
 
     while(controller != 'e')
@@ -125,12 +123,12 @@ int main()
         if (!disableOptions)
         {
             cout<<endl<<"============================================"<<endl<<endl;
-            cout<<"¿Que desea hacer? Hit (h), Deal (d), Stand (s), Salir (e) "<<endl;
+            cout<<"Next move: Hit (h), Deal (d), Stand (s), Exit (e) "<<endl;
         }
         else
         {
             cout<<endl<<"============================================<<endl"<<endl;
-            cout<<"Que desea hacer? Deal (d), Salir (e) "<<endl;
+            cout<<"Next move: Deal (d), Exit (e) "<<endl;
         }
         cin>>controller;
     }
