@@ -1,13 +1,3 @@
-//
-//  main.cpp
-//  Blackjack
-//
-//  Created by Esteban Arocha Ortuño on 10/31/17.
-//  Copyright © 2017 EstebanAO. All rights reserved.
-//
-
-
-
 #include <iostream>
 using namespace std;
 
@@ -25,7 +15,7 @@ void deal(Deck &deckJuego, Mano &ManoD, Mano &ManoJ)
     ManoD.printD();
     cout<<endl<<endl<<"Your hand: "<<endl<<endl;
     ManoJ.printJ();
-
+    
 }
 
 void hit(Mano &ManoJ,Mano ManoD, Deck &deckJuego, bool &disableOptions, int &score)
@@ -46,18 +36,21 @@ void hit(Mano &ManoJ,Mano ManoD, Deck &deckJuego, bool &disableOptions, int &sco
     }
 }
 
-void stand(Mano &ManoD, Mano ManoJ, Deck &deckJuego, bool &disableOptions, int &score)
+void hitCardsD(Mano &ManoD, Mano ManoJ, Deck &deckJuego)
 {
     while(
           (ManoD.getMinSumaGanadora() < 17 || ManoD.getMaxSumaGanadora() < 17) &&
           ManoD.getMinSumaGanadora() < ManoJ.getscore() &&
           ManoD.getMaxSumaGanadora() < ManoJ.getscore()
           )
-          
+        
     {
         ManoD.getCarta(deckJuego);
     }
-    
+}
+
+void declareWinner(Mano &ManoD, Mano ManoJ, bool &disableOptions, int &score)
+{
     if (ManoJ.getscore() > 21)
     {
         cout<<"Busted, dealer's hand is: "<<endl;
@@ -79,6 +72,13 @@ void stand(Mano &ManoD, Mano ManoJ, Deck &deckJuego, bool &disableOptions, int &
     }
     cout<<endl<<"Your score is: "<<score<<endl;
     disableOptions = true;
+    
+}
+
+void stand(Mano &ManoD, Mano ManoJ, Deck &deckJuego, bool &disableOptions, int &score)
+{
+    hitCardsD(ManoD, ManoJ, deckJuego);
+    declareWinner(ManoD, ManoJ, disableOptions, score);
 }
 
 int main()
@@ -90,7 +90,7 @@ int main()
     int score = 0;
     
     cout<<"BlackJack:"<<endl<<endl;
-
+    
     cout<<"============================================"<<endl<<endl;
     deal(deckJuego, manoD, manoJ);
     
@@ -98,7 +98,7 @@ int main()
     cout<<endl<<"============================================"<<endl<<endl;
     cout<<"Next move:  Hit (h), Deal (d), Stand (s), Exit (e) "<<endl;
     cin>>controller;
-
+    
     while(controller != 'e')
     {
         switch (controller)
@@ -127,7 +127,7 @@ int main()
         }
         else
         {
-            cout<<endl<<"============================================<<endl"<<endl;
+            cout<<endl<<"============================================"<<endl<<endl;
             cout<<"Next move: Deal (d), Exit (e) "<<endl;
         }
         cin>>controller;
